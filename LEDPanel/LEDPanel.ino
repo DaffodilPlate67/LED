@@ -1,6 +1,3 @@
-#include <Adafruit_CircuitPlayground.h>
-#include <Adafruit_Circuit_Playground.h>
-
 #include <Adafruit_GFX.h>
 #include <Adafruit_SPITFT.h>
 #include <Adafruit_SPITFT_Macros.h>
