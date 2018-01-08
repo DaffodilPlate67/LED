@@ -36,6 +36,9 @@ void setup() {
 void loop() {
   int16_t sx, sy, x, y, xc, yc, r;
   uint8_t h;
+  //IMPORTANT NOTE:
+  //These functions use coordinates x,y
+  //But for some reason x is the one that goes down and y is to the right
   for (x = 0; x < (leds.Width() + leds.Height()); x++)
   {
     leds.DrawCircle(8, 8, 6, CRGB::Purple);
