@@ -6,8 +6,8 @@
 #include <Adafruit_SPITFT_Macros.h>
 #include <gfxfont.h>
 
-#include <FastLED.h>        //https://github.com/FastLED/FastLED
-#include <LEDMatrix.h>      //https://github.com/Jorgen-VikingGod/LEDMatrix
+#include <FastLED.h>        
+#include <LEDMatrix.h>    
 
 // Change the next defines to match your matrix type and size
 #define DATA_PIN            5
