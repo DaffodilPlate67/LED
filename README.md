@@ -1,6 +1,10 @@
 # LED
 LED Panel for 4461
 
+Using Arduino Mega2569
+
+16x16 LED Panel
+
 You will need these following libraries:
 
 FastLED http://fastled.io/
