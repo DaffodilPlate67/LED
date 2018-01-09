@@ -1,7 +1,7 @@
 # LED
 LED Panel for 4461
 
-Using Arduino Mega2569
+Using Arduino Mega2560
 
 16x16 LED Panel
 
