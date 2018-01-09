@@ -1,10 +1,6 @@
-#include <Adafruit_GFX.h>
-#include <Adafruit_SPITFT.h>
-#include <Adafruit_SPITFT_Macros.h>
-#include <gfxfont.h>
-
-#include <FastLED.h>        
-#include <LEDMatrix.h>    
+#include <FastLED.h>
+#include <LEDMatrix.h>
+#include <FastLED_GFX.h>
 
 // Change the next defines to match your matrix type and size
 #define DATA_PIN            5
@@ -15,7 +11,7 @@
 // initial matrix layout (to get led strip index by x/y)
 #define MATRIX_WIDTH        16
 #define MATRIX_HEIGHT       16
-#define MATRIX_TYPE         HORIZONTAL_ZIGZAG_MATRIX
+#define MATRIX_TYPE         VERTICAL_ZIGZAG_MATRIX
 #define MATRIX_SIZE         (MATRIX_WIDTH*MATRIX_HEIGHT)
 #define NUMPIXELS           MATRIX_SIZE
 
@@ -33,16 +29,51 @@ void setup() {
 void loop() {
   int16_t sx, sy, x, y, xc, yc, r;
   uint8_t h;
-  //IMPORTANT NOTE:
-  //These functions use coordinates x,y
-  //But for some reason x is the one that goes down and y is to the right
-  for (x = 0; x < (leds.Width() + leds.Height()); x++)
+  for (x = 0; x < 256; x++)
   {
-    leds.DrawCircle(8, 8, 6, CRGB::Purple);
-    leds.DrawCircle(5,6,1, CRGB::Blue);
-    leds.DrawCircle(5,10,1, CRGB::Blue);
-    leds.DrawRectangle(10,5,11,11, CRGB::Green);
+    drawTriangle(2, 1, 8, 1, 8, 7, CRGB::Red);
+    //drawJapFlag();
   }
   FastLED.show();
+}
+
+
+void drawNorwegianFlag() {
+  int16_t x = (leds.Width() / 4);
+  int16_t y = (leds.Height() / 2) - 2;
+  leds.DrawFilledRectangle(0, 0, x, y, CRGB(255, 255, 255));
+  leds.DrawFilledRectangle(0, 0, x - 1, y - 1, CRGB(255, 0, 0));
+  leds.DrawFilledRectangle(x + 3, 0, leds.Width() - 1, y, CRGB(255, 255, 255));
+  leds.DrawFilledRectangle(x + 4, 0, leds.Width() - 1, y - 1, CRGB(255, 0, 0));
+  leds.DrawFilledRectangle(0, y + 3, x, leds.Height() - 1, CRGB(255, 255, 255));
+  leds.DrawFilledRectangle(0, y + 4, x - 1, leds.Height() - 1, CRGB(255, 0, 0));
+  leds.DrawFilledRectangle(x + 3, y + 3, leds.Width() - 1, leds.Height() - 1, CRGB(255, 255, 255));
+  leds.DrawFilledRectangle(x + 4, y + 4, leds.Width() - 1, leds.Height() - 1, CRGB(255, 0, 0));
+  leds.DrawLine(0, y + 1, leds.Width() - 1, y + 1, CRGB(0, 0, 255));
+  leds.DrawLine(0, y + 2, leds.Width() - 1, y + 2, CRGB(0, 0, 255));
+  leds.DrawLine(x + 1, 0, x + 1, leds.Height() - 1, CRGB(0, 0, 255));
+  leds.DrawLine(x + 2, 0, x + 2, leds.Height() - 1, CRGB(0, 0, 255));
+}
+
+void drawJapFlag() {
+  leds.DrawFilledRectangle(0, 0, leds.Width() - 1, leds.Height() - 1, CRGB::White);
+  uint16_t r = min((leds.Width() - 1) / 2, (leds.Height() - 1) / 2) - 1;
+  leds.DrawFilledCircle((leds.Width() - 1) / 2, (leds.Height() - 1) / 2, r, CRGB::Red);
+}
+
+void drawFace() {
+  int16_t x = (leds.Width() / 2);
+  int16_t y = (leds.Height() / 2);
+  leds.DrawCircle(x, y, 6, CRGB::Purple);
+  leds.DrawCircle(5, 6, 1, CRGB::Blue);
+  leds.DrawCircle(5, 10, 1, CRGB::Blue);
+  leds.DrawRectangle(10, 5, 11, 11, CRGB::Green);
+}
+
+//Function to draw triangles
+void drawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, CRGB color) {
+  leds.DrawLine(x0, y0, x1, y1, color);
+  leds.DrawLine(x1, y1, x2, y2, color);
+  leds.DrawLine(x2, y2, x0, y0, color);
 }
 
