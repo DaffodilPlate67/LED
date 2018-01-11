@@ -41,9 +41,20 @@ void loop() {
   uint8_t h;
   for (x = 0; x < leds.Size(); x++)
   {
-    drawMushroom();
+    //drawMushroom();
+    drawBlock();
   }
   FastLED.show();
+}
+
+void drawBlock(){
+  int16_t x = leds.Width() / 8;
+  int16_t y = leds.Height() / 8;
+  leds.DrawFilledRectangle(0,0,15,15,CRGB::Yellow);
+  leds.DrawFIlledCricle(x,y,3, CRGB(255,165,0));
+  leds.DrawFilledCircle(x + 11, y,3,CRGB(255,165,0));
+  leds.DrawFilledCircle(x , y + 11, 3, CRGB(255,165,0));
+  leds.DrawFilledCircle(x + 11, y + 11, 3, CRGB(255,165,0));
 }
 
 void drawMushroom() {
