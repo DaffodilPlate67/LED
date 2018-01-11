@@ -14,15 +14,25 @@
 #define MATRIX_TYPE         VERTICAL_ZIGZAG_MATRIX
 #define MATRIX_SIZE         (MATRIX_WIDTH*MATRIX_HEIGHT)
 #define NUMPIXELS           MATRIX_SIZE
-#define BRIGHTNESS          10
-
+#define BRIGHTNESS          5
 // create our matrix based on matrix definition
 cLEDMatrix<MATRIX_WIDTH, MATRIX_HEIGHT, MATRIX_TYPE> leds;
 
 void setup() {
   // initial FastLED by using CRGB led source from our matrix class
-  FastLED.addLeds<CHIPSET, DATA_PIN, COLOR_ORDER>(leds[0], leds.Size()).setCorrection(TypicalLEDStrip);
+  FastLED.addLeds<CHIPSET, DATA_PIN, COLOR_ORDER>(leds[0], leds.Size()).setCorrection(TypicalSMD5050);
+  FastLED.setCorrection(TypicalLEDStrip);
   FastLED.setBrightness(BRIGHTNESS);
+
+  //Setup Works
+  FastLED.showColor(CRGB::Red);
+  delay(1000);
+  FastLED.showColor(CRGB::Lime);
+  delay(1000);
+  FastLED.showColor(CRGB::Blue);
+  delay(1000);
+  FastLED.showColor(CRGB::White);
+  delay(1000);
   FastLED.clear(true);
 }
 
@@ -31,21 +41,28 @@ void loop() {
   uint8_t h;
   for (x = 0; x < leds.Size(); x++)
   {
-    //drawTriangle(2, 1, 8, 1, 8, 7, CRGB::Red);
-    drawNorwayFlag();
-    //    FastLED.show();
-    //    delay(1000);
-    //    drawJapFlag();
-    //    FastLED.show();
-    //    delay(1000);
-    //    FastLED.clear();
-    //    drawFace();
-    //    FastLED.show();
-    //    delay(1000);
-    //drawQuadrilateral(0,0,0,5,5,5,5,0, CRGB::Red);
+    drawMushroom();
   }
   FastLED.show();
 }
+
+void drawMushroom() {
+  //Draw Red head
+  leds.DrawFilledCircle(8, 6, 7, CRGB(200, 0, 0));
+  //Draw white circle thingy
+  leds.DrawFilledCircle(8, 5, leds.Width() / 4, CRGB(100, 100, 100));
+  //DrawFace outline
+  leds.DrawFilledRectangle(5 , 12, 11, 15, CRGB(250, 160, 110));
+  //Draw Eyes
+  leds.DrawLine(7, 13, 7, 14, CRGB::Black);
+  leds.DrawLine(9, 13, 9, 14, CRGB::Black);
+  //Draw White part in helmet
+  leds.DrawLine(1, 4, 1, 8, CRGB::White);
+  leds.DrawLine(2, 2, 2, 10, CRGB::White);
+  leds.DrawLine(15, 4, 15, 8, CRGB::White);
+  leds.DrawLine(14, 2, 14, 10, CRGB::White);
+}
+
 
 
 void drawNorwayFlag() {
@@ -94,5 +111,4 @@ void drawQuadrilateral(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x
   leds.DrawLine(x2, y2, x3, y3, color);
   leds.DrawLine(x3, y3, x0, y0, color);
 }
-
 
