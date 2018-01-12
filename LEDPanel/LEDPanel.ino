@@ -123,3 +123,10 @@ void drawQuadrilateral(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x
   leds.DrawLine(x3, y3, x0, y0, color);
 }
 
+void drawPentagon(){int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, int16_t x3, int16_t y3,int16_t x4, int16_t y,4 CRGB color
+  leds.DrawLine(x0, y0, x1, y1, color);
+  leds.DrawLine(x1, y1, x2, y2, color);
+  leds.DrawLine(x2, y2, x3, y3, color);
+  leds.DrawLine(x3, y3, x4, y4, color);
+  leds.DrawLine(x4, y3, x4, y4, color);
+}
